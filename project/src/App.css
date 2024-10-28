@@ -1,0 +1,58 @@
+* {
+  background-color: #000000;
+  font-family: 'Playfair Display';
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-weight: 100;
+  src: url('./font/PlayfairDisplay-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-weight: 200;
+  src: url('./font/PlayfairDisplay-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-weight: 300;
+  src: url('./font/PlayfairDisplay-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-weight: 400;
+  src: url('./font/PlayfairDisplay-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-weight: 500;
+  src: url('./font/PlayfairDisplay-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-weight: 600;
+  src: url('./font/PlayfairDisplay-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-weight: 700;
+  src: url('./font/PlayfairDisplay-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-weight: 800;
+  src: url('./font/PlayfairDisplay-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-weight: 900;
+  src: url('./font/PlayfairDisplay-SemiBold.ttf');
+}
