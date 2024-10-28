@@ -31,6 +31,7 @@ export const PhotoShootPage = () => {
       const imgSrc = webcamRef.current.getScreenshot();
       setCount((prevCount) => prevCount + 1);
       setIsCapture(imgSrc);
+      localStorage.setItem(count, imgSrc);
     }
 
     setTimeout(() => setIsCapture(null), 1300);
