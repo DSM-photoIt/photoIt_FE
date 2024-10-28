@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import { theme } from '../theme/theme';
 import { Frame } from '../components/public/Frame';
+import { useNavigate } from 'react-router-dom';
 
 export const MainPage = () => {
+  const navigate = useNavigate();
+
+  const startClick = () => {
+    navigate('/photoshoot');
+  };
   return (
-    <MainContainer>
+    <MainContainer onClick={startClick}>
       <Frame></Frame>
       <SubContainer>
         <TitleContainer>

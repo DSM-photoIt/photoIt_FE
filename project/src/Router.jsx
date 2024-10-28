@@ -1,6 +1,5 @@
-import { MainPage } from './pages';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { PhotoShootPage } from './pages';
+import { PhotoShootPage, MainPage } from './pages';
 export const Router = () => {
   return (
     <BrowserRouter>
