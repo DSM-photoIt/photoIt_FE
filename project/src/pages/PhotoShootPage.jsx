@@ -10,21 +10,28 @@ export const PhotoShootPage = () => {
   const webcamRef = useRef(null);
   const [isCapture, setIsCapture] = useState(null);
   const [count, setCount] = useState(0);
+  const [countDown, setCountDown] = useState(10);
 
   useEffect(() => {
-    if (count <= 9) {
-      const timer = setTimeout(() => {
+    if (count < 9) {
+      if (countDown > 0) {
+        const timeCount = setInterval(() => {
+          setCountDown((prevCountDown) => prevCountDown - 1);
+        }, 1000);
+
+        return () => clearInterval(timeCount);
+      } else {
+        setCountDown(10);
         capture();
-      }, 10000);
-      if (count === 9) {
+      }
+
+      if (count === 8) {
         setTimeout(() => {
           navigate('/photocheck');
         }, 2000);
       }
-
-      return () => clearTimeout(timer);
     }
-  }, [count]);
+  }, [count, countDown]);
 
   const capture = () => {
     if (webcamRef.current) {
@@ -41,6 +48,7 @@ export const PhotoShootPage = () => {
     <PhotoShootContainer>
       <Frame />
       <WebcamContainer>
+        <TimeCount>{countDown}</TimeCount>
         <Webcam
           width={2500}
           height={780}
@@ -53,6 +61,16 @@ export const PhotoShootPage = () => {
     </PhotoShootContainer>
   );
 };
+const TimeCount = styled.div`
+  transform: scaleX(-1);
+  position: absolute;
+  font-size: 45px;
+  font-weight: 700;
+  color: ${theme.color.white};
+  background-color: transparent;
+  top: 42px;
+  right: 70px;
+`;
 
 const PhotoFinish = styled.div`
   display: flex;
@@ -83,4 +101,5 @@ const WebcamContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
