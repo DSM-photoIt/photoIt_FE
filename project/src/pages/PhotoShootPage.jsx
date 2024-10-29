@@ -18,7 +18,7 @@ export const PhotoShootPage = () => {
       }, 10000);
       if (count === 9) {
         setTimeout(() => {
-          navigate('/');
+          navigate('/photocheck');
         }, 2000);
       }
 
