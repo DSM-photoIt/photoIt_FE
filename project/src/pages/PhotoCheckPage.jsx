@@ -1,22 +1,25 @@
 import styled from 'styled-components';
 import { PhotoFrame } from '../components/public/PhotoFrame';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { theme } from '../theme/theme';
 import { Frame } from '../components/public/Frame';
 import { Button } from '../components/public/Button';
-import { useNavigate } from 'react-router-dom';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
+import { PrintingPage } from './PrintingPage';
 
 export const PhotoCheckPage = () => {
+  const [isPrinting, setIsPrinting] = useState(false);
+  // const [photoPNG, setPhotoPNG] = useState(null);
   const photoRef = useRef();
-  const navigate = useNavigate();
 
   const nextClick = () => {
     const photo = photoRef.current;
     domtoimage.toBlob(photo).then((blob) => {
+      setIsPrinting(true);
       saveAs(blob, 'photoIt.png');
-      navigate('/');
+      // const url = URL.createObjectURL(blob);
+      // setPhotoPNG(url);
     });
   };
 
@@ -44,6 +47,7 @@ export const PhotoCheckPage = () => {
 
   return (
     <PhotoCheckContainer>
+      {isPrinting && <PrintingPage></PrintingPage>}
       <Frame />
       <PhotoContainer>
         <ImgContentsTwo>
