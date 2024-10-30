@@ -1,16 +1,27 @@
 import styled from 'styled-components';
 import { PhotoFrame } from '../components/public/PhotoFrame';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { theme } from '../theme/theme';
+import { Frame } from '../components/public/Frame';
+import { Button } from '../components/public/Button';
+import { useNavigate } from 'react-router-dom';
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
 
 export const PhotoCheckPage = () => {
-  //따로따로 처리할 때 useState와 onClick 함수를 따로 처리해주는 것이 비효율적인 것 같다.
+  const photoRef = useRef();
+  const navigate = useNavigate();
 
-  // const [isImgClick, setIsImgClick] = useState(false);
+  const nextClick = () => {
+    const photo = photoRef.current;
+    domtoimage.toBlob(photo).then((blob) => {
+      saveAs(blob, 'photoIt.png');
+      navigate('/');
+    });
+  };
 
-  // const photoClick = () => {
-  //   setIsImgClick(!isImgClick);
-  // };
+  const [selectedImg, setSelectedImg] = useState([]);
+
   const firstImg = localStorage.getItem('0');
   const secondImg = localStorage.getItem('1');
   const thirdImg = localStorage.getItem('2');
@@ -21,71 +32,89 @@ export const PhotoCheckPage = () => {
   const eightedImg = localStorage.getItem('7');
   const ninedImg = localStorage.getItem('8');
 
+  const selectedClick = (src) => {
+    setSelectedImg((prevImg) => {
+      if (prevImg.length < 4 && !prevImg.includes(src)) {
+        return [...prevImg, src];
+      } else {
+        return prevImg;
+      }
+    });
+  };
+
   return (
-    <PhotoContainer>
-      <ImgContentsTwo>
-        <ImgContentsOne>
-          <ImgContent
-            src={firstImg}
-            // onClick={photoClick}
-            // isImgClick={isImgClick}
-          />
-          <ImgContent
-            src={secondImg}
-            // onClick={photoClick}
-            // isImgClick={isImgClick}
-          />
-          <ImgContent
-            src={thirdImg}
-            // onClick={photoClick}
-            // isImgClick={isImgClick}
-          />
-        </ImgContentsOne>
-        <ImgContentsOne>
-          <ImgContent
-            src={fourthImg}
-            // onClick={photoClick}
-            // isImgClick={isImgClick}
-          />
-          <ImgContent
-            src={fifthImg}
-            // onClick={photoClick}
-            // isImgClick={isImgClick}
-          />
-          <ImgContent
-            src={sixthImg}
-            // onClick={photoClick}
-            // isImgClick={isImgClick}
-          />
-        </ImgContentsOne>
-        <ImgContentsOne>
-          <ImgContent
-            src={seventhImg}
-            // onClick={photoClick}
-            // isImgClick={isImgClick}
-          />
-          <ImgContent
-            src={eightedImg}
-            // onClick={photoClick}
-            // isImgClick={isImgClick}
-          />
-          <ImgContent
-            src={ninedImg}
-            // onClick={photoClick}
-            // isImgClick={isImgClick}
-          />
-        </ImgContentsOne>
-      </ImgContentsTwo>
-      <PhotoFrame />
-    </PhotoContainer>
+    <PhotoCheckContainer>
+      <Frame />
+      <PhotoContainer>
+        <ImgContentsTwo>
+          <ImgContentsOne>
+            <ImgContent
+              src={firstImg}
+              onClick={() => selectedClick(firstImg)}
+            />
+            <ImgContent
+              src={secondImg}
+              onClick={() => selectedClick(secondImg)}
+            />
+            <ImgContent
+              src={thirdImg}
+              onClick={() => selectedClick(thirdImg)}
+            />
+          </ImgContentsOne>
+          <ImgContentsOne>
+            <ImgContent
+              src={fourthImg}
+              onClick={() => selectedClick(fourthImg)}
+            />
+            <ImgContent
+              src={fifthImg}
+              onClick={() => selectedClick(fifthImg)}
+            />
+            <ImgContent
+              src={sixthImg}
+              onClick={() => selectedClick(sixthImg)}
+            />
+          </ImgContentsOne>
+          <ImgContentsOne>
+            <ImgContent
+              src={seventhImg}
+              onClick={() => selectedClick(seventhImg)}
+            />
+            <ImgContent
+              src={eightedImg}
+              onClick={() => selectedClick(eightedImg)}
+            />
+            <ImgContent
+              src={ninedImg}
+              onClick={() => selectedClick(ninedImg)}
+            />
+          </ImgContentsOne>
+          <Button childeren={'next'} onClick={nextClick} />
+        </ImgContentsTwo>
+        <PhotoFrame
+          selectedImg={selectedImg}
+          ref={photoRef}
+          className="photo"
+        />
+      </PhotoContainer>
+      <Frame />
+    </PhotoCheckContainer>
   );
 };
 
+const PhotoCheckContainer = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+`;
+
 const PhotoContainer = styled.div`
+  width: 100%;
   display: flex;
   gap: 100px;
   justify-content: center;
-  margin-top: 70px;
+  margin: 70px 0 70px 0;
 `;
 
 const ImgContentsTwo = styled.div`
@@ -100,9 +129,10 @@ const ImgContentsOne = styled.div`
 `;
 
 const ImgContent = styled.img`
-  width: 300px;
-  height: 190px;
+  width: 250px;
+  height: 159px;
   transform: scaleX(-1);
+  object-fit: cover;
   /* border: ${(props) =>
     props.isImgClick ? `2px solid ${theme.color.white}` : `none`};
   position: relative; */

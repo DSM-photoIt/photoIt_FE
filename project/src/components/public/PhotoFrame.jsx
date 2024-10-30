@@ -3,26 +3,48 @@ import { theme } from '../../theme/theme';
 import frameLeft from '../../assets/frame/frameLeft.svg';
 import frameRight from '../../assets/frame/frameRight.svg';
 import frameTitle from '../../assets/frame/frameTitle.svg';
+import { forwardRef } from 'react';
 
-export const PhotoFrame = () => {
+export const PhotoFrame = forwardRef(({ selectedImg, className }, ref) => {
   return (
     <>
-      <FrameContainer>
-        <img src={frameTitle} alt="title" />
+      <FrameContainer ref={ref} className={className}>
+        <TitleContainer>
+          <img src={frameTitle} alt="title" />
+        </TitleContainer>
         <SubOneContainer>
           <img src={frameLeft} alt="left" />
           <PhotoContents>
-            <PhotoContent />
-            <PhotoContent />
-            <PhotoContent />
-            <PhotoContent />
+            {selectedImg.map((imgSrc, index) => {
+              return (
+                <PhotoContent key={index}>
+                  {imgSrc ? (
+                    <SelectedImage src={imgSrc} alt="img" />
+                  ) : (
+                    <EmptyContainer />
+                  )}
+                </PhotoContent>
+              );
+            })}
           </PhotoContents>
           <img src={frameRight} alt="right" />
         </SubOneContainer>
       </FrameContainer>
     </>
   );
-};
+});
+
+const EmptyContainer = styled.div`
+  width: 250px;
+  height: 159px;
+  background-color: ${theme.color.black};
+`;
+
+const SelectedImage = styled.img`
+  width: 100%;
+  height: 100%;
+  transform: scaleX(-1);
+`;
 
 const SubOneContainer = styled.div`
   display: flex;
@@ -42,13 +64,16 @@ const FrameContainer = styled.div`
   background-color: ${theme.color.white};
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   gap: 30px;
-  position: relative;
+  overflow: hidden;
+`;
+
+const TitleContainer = styled.div`
+  margin: 23px 0 0 17px;
 `;
 
 const PhotoContent = styled.div`
   width: 250px;
-  height: 159px;
-  background-color: transparent;
+  height: 170px;
 `;
