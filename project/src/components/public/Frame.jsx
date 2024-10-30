@@ -17,4 +17,7 @@ const FrameContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 328px;
+  padding: 0;
+  border: 0;
+  margin: 0;
 `;

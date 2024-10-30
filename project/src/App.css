@@ -1,6 +1,9 @@
 * {
-  background-color: #000000;
   font-family: 'Playfair Display';
+}
+
+body {
+  background-color: #000000;
 }
 
 @font-face {
