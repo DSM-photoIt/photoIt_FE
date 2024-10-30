@@ -75,5 +75,5 @@ const TitleContainer = styled.div`
 
 const PhotoContent = styled.div`
   width: 250px;
-  height: 170px;
+  height: 165px;
 `;
