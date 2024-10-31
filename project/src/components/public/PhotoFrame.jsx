@@ -18,11 +18,7 @@ export const PhotoFrame = forwardRef(({ selectedImg, className }, ref) => {
             {selectedImg.map((imgSrc, index) => {
               return (
                 <PhotoContent key={index}>
-                  {imgSrc ? (
-                    <SelectedImage src={imgSrc} alt="img" />
-                  ) : (
-                    <EmptyContainer />
-                  )}
+                  {imgSrc && <SelectedImage src={imgSrc} alt="img" />}
                 </PhotoContent>
               );
             })}
@@ -33,12 +29,6 @@ export const PhotoFrame = forwardRef(({ selectedImg, className }, ref) => {
     </>
   );
 });
-
-const EmptyContainer = styled.div`
-  width: 250px;
-  height: 159px;
-  background-color: ${theme.color.black};
-`;
 
 const SelectedImage = styled.img`
   width: 100%;
@@ -52,6 +42,7 @@ const SubOneContainer = styled.div`
 `;
 
 const PhotoContents = styled.div`
+  width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
