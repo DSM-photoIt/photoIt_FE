@@ -64,7 +64,7 @@ const FrameContainer = styled.div`
   background-color: ${theme.color.white};
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: space-around;
   gap: 30px;
   overflow: hidden;
 `;
@@ -74,6 +74,6 @@ const TitleContainer = styled.div`
 `;
 
 const PhotoContent = styled.div`
-  width: 250px;
-  height: 225px;
+  width: 250x;
+  height: 175px;
 `;
