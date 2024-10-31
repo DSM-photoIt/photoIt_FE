@@ -13,7 +13,7 @@ export const PhotoCheckPage = () => {
   // const [photoPNG, setPhotoPNG] = useState(null);
   const photoRef = useRef();
 
-  const nextClick = () => {
+  const printClick = () => {
     const photo = photoRef.current;
     domtoimage.toBlob(photo).then((blob) => {
       setIsPrinting(true);
@@ -93,7 +93,7 @@ export const PhotoCheckPage = () => {
               onClick={() => selectedClick(ninedImg)}
             />
           </ImgContentsOne>
-          <Button childeren={'next'} onClick={nextClick} />
+          <Button childeren={'print'} onClick={printClick} />
         </ImgContentsTwo>
         <PhotoFrame
           selectedImg={selectedImg}
