@@ -23,4 +23,5 @@ const SubWriting = styled.div`
   font-size: 20px;
   font-weight: 500;
   color: ${theme.color.white};
+  white-space: nowrap;
 `;
