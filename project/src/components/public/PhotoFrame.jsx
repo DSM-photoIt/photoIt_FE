@@ -39,10 +39,12 @@ const SelectedImage = styled.img`
 const SubOneContainer = styled.div`
   display: flex;
   justify-content: center;
+  overflow: hidden;
 `;
 
 const PhotoContents = styled.div`
   width: 250px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
